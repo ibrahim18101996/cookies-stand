@@ -1,130 +1,68 @@
 `use strict`;
-var hours = [ '6am','7am','8am','9am','10am','11am',"12am",'1am',
-'2am','3am','14am','5am',"6am",'am7','8am'];
-var Seattle = {
-    name : "Seattle" , 
-    min1: 23,   
-    max1: 65,
-    avrCoocHour : 6.3 ,
-    randomCostumerArray : [],
-    avgSalesHoure : [] ,  
-    getRandomCustomNum :  function () {
-        for(var i =0 ; i < hours.length ; i++)
-        {
-             this.randomCostumerArray.push(getRandomNum(this.min1,this.max1))
-             this.avgSalesHoure[i] =Math.ceil( 6.3 * this.randomCostumerArray[i] )
-        }
-        console.log(this.randomCostumerArray)
-        console.log(this.avgSalesHoure)
-    }
-};
-var Tokyo = {
-    name : "Tokyo" , 
-    min1: 3,    
-    max1: 24,
-    avrCoocHour : 1.2 ,
-    randomCostumerArray : [],
-    avgSalesHoure : [] ,  
-    getRandomCustomNum :  function () {
-        for(var i =0 ; i < hours.length ; i++)
-        {
-             this.randomCostumerArray.push(getRandomNum(this.min1,this.max1))
-             this.avgSalesHoure[i] =Math.ceil( 6.3 * this.randomCostumerArray[i] )
-        }
-        console.log(this.randomCostumerArray)
-        console.log(this.avgSalesHoure)
-    }
-};
-var Dubai = {
-    name : "Dubai" , 
-    min1: 11,   
-    max1: 38,
-    avrCoocHour : 3.7 ,
-    randomCostumerArray : [],
-    avgSalesHoure : [] ,  
-    getRandomCustomNum :  function () {
-        for(var i =0 ; i < hours.length ; i++)
-        {
-             this.randomCostumerArray.push(getRandomNum(this.min1,this.max1))
-             this.avgSalesHoure[i] =Math.ceil( 6.3 * this.randomCostumerArray[i] )
-        }
-        console.log(this.randomCostumerArray)
-        console.log(this.avgSalesHoure)
-    }
-};
-var Paris = {
-    name : "Paris" , 
-    min1: 20,   
-    max1: 38,
-    avrCoocHour : 2.3 ,
-    randomCostumerArray : [],
-    avgSalesHoure : [] ,  
-    getRandomCustomNum :  function () {
-        for(var i =0 ; i < hours.length ; i++)
-        {
-             this.randomCostumerArray.push(getRandomNum(this.min1,this.max1))
-             this.avgSalesHoure[i] =Math.ceil( 6.3 * this.randomCostumerArray[i] )
-        }
-        console.log(this.randomCostumerArray)
-        console.log(this.avgSalesHoure)
-    }
-};
-var Lima = {
-    name : "Lima" , 
-    min1: 2,    
-    max1: 16,
-    avrCoocHour : 4.6 ,
-    randomCostumerArray : [],
-    avgSalesHoure : [] ,  
-    getRandomCustomNum :  function () {
-        for(var i =0 ; i < hours.length ; i++)
-        {
-             this.randomCostumerArray.push(getRandomNum(this.min1,this.max1))
-             this.avgSalesHoure[i] =Math.ceil( 6.3 * this.randomCostumerArray[i] )
-        }
-        console.log(this.randomCostumerArray)
-        console.log(this.avgSalesHoure)
-    }
-};
-console.log(Seattle.getRandomCustomNum());
-console.log(Tokyo.getRandomCustomNum());
-function getRandomNum(min , max ) {
-    minRan = Math.ceil(min);
-    maxRan = Math.floor(max);
-    return Math.floor(Math.random() * (maxRan - minRan)) + minRan;
+var hours = [ '6 am','7 am','8 am','9 am','10 am','11 am',"12 am",'1 pm',
+'2 pm','3 pm','4 pm','5 pm',"6 pm",'7 pm','8 pm'];
+
+function Salmon(name ,min1 ,max1 ,avrCoocHour ){
+    this.name = name;
+    this.min1 = min1;
+    this.max1 = max1;
+    this.avrCoocHour =avrCoocHour;
+    this.randomCostumerArray =[];
+    this.avgSalesHoure = [];
+
 }
-// console.log(getnum)
+
+Salmon.prototype.gitAvrSalesHours = function(){
+    for(var i =0 ; i < hours.length ; i++)
+    {
+         this.randomCostumerArray.push(Math.floor(Math.random() * (this.max1 - this.min1) ) + this.min1)
+         this.avgSalesHoure[i] =Math.ceil(this.avrCoocHour * this.randomCostumerArray[i] )
+    }
+}
 var container = document.getElementById('container');
-console.log(Seattle.getRandomCustomNum());
-console.log(Tokyo.getRandomCustomNum());
-function getRandomNum(min , max ) {
-    minRan = Math.ceil(min);
-    maxRan = Math.floor(max);
-    return Math.floor(Math.random() * (maxRan - minRan)) + minRan;
-}
-// console.log(getnum)
-var container = document.getElementById('container');
-printSales(hours,Seattle);
-printSales(hours,Tokyo);
-printSales(hours,Dubai);
-printSales(hours,Paris);
-printSales(hours,Lima);
-function printSales(hours , obj) {
-    var SubTitle = document.createElement('h3');
-    SubTitle.textContent=obj.name; 
-    container.appendChild(SubTitle);
-    var list = document.createElement('ul');
-    container.appendChild(list);
-     
-     var arr = obj.avgSalesHoure;
-    var total =0 ; 
-    for (let index = 0; index < hours.length; index++) {
-        total = total +  arr[index];
-        var listItem = document.createElement('li'); 
-        listItem.textContent = hours[index]  + " : " + arr[index] + " Cookies" ; 
-        list.appendChild(listItem) ; 
+Salmon.prototype.printSales=function (hours ) {
+        var SubTitle = document.createElement('h3');
+        SubTitle.textContent=name; 
+        container.appendChild(SubTitle);
+        var list = document.createElement('ul');
+        container.appendChild(list);
+         
+         var arr = this.avgSalesHoure;
+        var total =0 ; 
+        for (let index = 0; index < hours.length; index++) {
+            total = total +  arr[index];
+            var listItem = document.createElement('li'); 
+            listItem.textContent = hours[index]  + " : " + arr[index] + " Cookies" ; 
+            list.appendChild(listItem) ; 
+        }
+        var listItemTotal = document.createElement('li'); 
+            listItemTotal.textContent = "Total"  + " : " + total + " Cookies" ; 
+            list.appendChild(listItemTotal) ; 
     }
-    var listItemTotal = document.createElement('li'); 
-        listItemTotal.textContent = "Total"  + " : " + total + " Cookies" ; 
-        list.appendChild(listItemTotal) ; 
-}
+
+var Seattle = new Salmon('seattle',23,65,6.3);
+Seattle.gitAvrSalesHours();
+Seattle.printSales(hours);
+
+var Tokyo = new Salmon('Tokyo',3,24,1.2);
+Tokyo.gitAvrSalesHours();
+Tokyo.printSales(hours);
+
+var Dubai = new Salmon('dubai',11,38,3.7);
+Dubai.gitAvrSalesHours();
+Dubai.printSales(hours);
+
+var Paris = new Salmon('Paris',20,38,2.3);
+Paris.gitAvrSalesHours();
+Paris.printSales(hours);
+
+var Lima = new Salmon('Lima',3,24,1.2);
+Lima.gitAvrSalesHours();
+Lima.printSales(hours);
+
+ 
+
+
+
+
+
