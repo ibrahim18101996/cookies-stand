@@ -1,68 +1,96 @@
-`use strict`;
-var hours = [ '6 am','7 am','8 am','9 am','10 am','11 am',"12 am",'1 pm',
-'2 pm','3 pm','4 pm','5 pm',"6 pm",'7 pm','8 pm'];
+'use strict'
+var hours = ['6 am', '7 am', '8 am', '9 am', '10 am', '11 am', "12 pm", '1 pm',
+'2 pm', '3 pm', '4 pm', '5 pm', "6 pm", '7 pm',`Total`];
+var total=0;
+function Salmon(name, min1 ,max1  , avrCoocHour) {
+this.name = name;
 
-function Salmon(name ,min1 ,max1 ,avrCoocHour ){
-    this.name = name;
-    this.min1 = min1;
-    this.max1 = max1;
-    this.avrCoocHour =avrCoocHour;
-    this.randomCostumerArray =[];
-    this.avgSalesHoure = [];
-
+this.min1 =  min1;
+this.max1 =  max1 ;
+this.avrCoocHour =  avrCoocHour;
+this.randomCostumerArray = [];
+this.avgSalesHoure= [];
+}
+Salmon.prototype.getRandomCustomNum  = function(){
+for (var i = 0; i < hours.length -1; i++) {
+        this.randomCostumerArray.push(getRandomNum(this.min1, this.max1))
+        this.avgSalesHoure[i] = Math.ceil(6.3 * this.randomCostumerArray[i])
+        total = total + this.avgSalesHoure[i]
+}
+        this.avgSalesHoure.push(total);
+}
+function getRandomNum(min , max ) {
+   var  minRan = Math.ceil(min);
+   var maxRan = Math.floor(max);
+    return Math.floor(Math.random() * (maxRan - minRan)) + minRan;
+}
+// 
+// header//...................................................................
+// 
+// 
+var table = document.getElementById('container');
+var tablEl = document.createElement('table');
+table.appendChild(tablEl);
+var tablehead = document.createElement('thead')
+tablEl.appendChild(tablehead);
+var th1 = document.createElement('th')
+tablehead.appendChild(th1);
+th1.textContent = "location";
+for(var i = 0; i < hours.length ;i ++){
+    var th1 = document.createElement('th');
+    tablehead.appendChild(th1);
+    th1.textContent = hours[i];
+    
 }
 
-Salmon.prototype.gitAvrSalesHours = function(){
-    for(var i =0 ; i < hours.length ; i++)
-    {
-         this.randomCostumerArray.push(Math.floor(Math.random() * (this.max1 - this.min1) ) + this.min1)
-         this.avgSalesHoure[i] =Math.ceil(this.avrCoocHour * this.randomCostumerArray[i] )
-    }
-}
-var container = document.getElementById('container');
-Salmon.prototype.printSales=function (hours ) {
-        var SubTitle = document.createElement('h3');
-        SubTitle.textContent=name; 
-        container.appendChild(SubTitle);
-        var list = document.createElement('ul');
-        container.appendChild(list);
-         
-         var arr = this.avgSalesHoure;
-        var total =0 ; 
-        for (let index = 0; index < hours.length; index++) {
-            total = total +  arr[index];
-            var listItem = document.createElement('li'); 
-            listItem.textContent = hours[index]  + " : " + arr[index] + " Cookies" ; 
-            list.appendChild(listItem) ; 
+// rander footer .........................................................................
+Salmon.prototype.printSales  = function(){
+    var tableRow = document.createElement('tr')
+    tablEl.appendChild(tableRow);
+    var td1 = document.createElement('td')
+    tableRow.appendChild(td1);
+    td1.textContent = this.name;
+    for( var i =0 ; i < hours.length; i++){
+       
+        var td1 = document.createElement('td')
+        tableRow.appendChild(td1);
+        td1.textContent = this.avgSalesHoure[i];
+        if (i > 13){
+            i++;
+            var td1 = document.createElement('td')
+            tableRow.appendChild(td1);
+            td1.textContent = this.avgSalesHoure[15];
         }
-        var listItemTotal = document.createElement('li'); 
-            listItemTotal.textContent = "Total"  + " : " + total + " Cookies" ; 
-            list.appendChild(listItemTotal) ; 
     }
+    };
+// footer.................................................................................
+var sum = 0;
+var tableFooter = document.createElement('tfoot');
+tablEl.appendChild(tableFooter);
+ var th1 = document.createElement('th')
+ tableFooter.appendChild(th1);
+th1.textContent = " Total ";
+for(var i = 0; i < name.length ;i ++){
+    var th1 = document.createElement('th');
+    tableFooter.appendChild(th1);
+    th1.textContent = sum;
+}
 
-var Seattle = new Salmon('seattle',23,65,6.3);
-Seattle.gitAvrSalesHours();
-Seattle.printSales(hours);
-
-var Tokyo = new Salmon('Tokyo',3,24,1.2);
-Tokyo.gitAvrSalesHours();
-Tokyo.printSales(hours);
-
-var Dubai = new Salmon('dubai',11,38,3.7);
-Dubai.gitAvrSalesHours();
-Dubai.printSales(hours);
-
-var Paris = new Salmon('Paris',20,38,2.3);
-Paris.gitAvrSalesHours();
-Paris.printSales(hours);
-
-var Lima = new Salmon('Lima',3,24,1.2);
-Lima.gitAvrSalesHours();
-Lima.printSales(hours);
-
- 
-
-
-
-
-
+    var seattle = new Salmon('Seatle',23,65,6.3);
+    seattle.getRandomCustomNum();
+    seattle.printSales();
+    
+    var tokyo = new Salmon('Tokyo',3,24,1.2);
+    tokyo.getRandomCustomNum();
+    tokyo.printSales();
+    var dubai = new Salmon('Dubai',11,38,3.7);
+    dubai.getRandomCustomNum();
+    dubai.printSales();
+    
+    var paris = new Salmon('Paris',20,38,2.3);
+    paris.getRandomCustomNum();
+    paris.printSales();
+    
+    var lima = new Salmon('Lima',3,24,1.2);
+    lima.getRandomCustomNum();
+    lima.printSales();
