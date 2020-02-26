@@ -10,6 +10,7 @@ this.max1 =  max1 ;
 this.avrCoocHour =  avrCoocHour;
 this.randomCostumerArray = [];
 this.avgSalesHoure= [];
+this.allSope =[];
 }
 Salmon.prototype.getRandomCustomNum  = function(){
 for (var i = 0; i < hours.length -1; i++) {
@@ -24,10 +25,49 @@ function getRandomNum(min , max ) {
    var maxRan = Math.floor(max);
     return Math.floor(Math.random() * (maxRan - minRan)) + minRan;
 }
-// 
+var myForm = document.getElementById('form1');
+myForm.addEventListener('submit',function(event){
+    event.preventDefault();
+    console.log(event);
+    name =event.target.name.value;
+    console.log(name);
+    var min1 = event.target.min1.value;
+    console.log(min1);
+    var max1 =event.target.max1.value;
+    console.log(max1);
+    var sales =event.target.sales.value;
+    console.log(sales);
+
+
+    if (name == "") {
+        alert("Name must be filled out");
+        return false;
+      }
+      if (min1 == "") {
+        alert("Name must be filled out");
+        return false;
+      }
+      if (max1 == "") {
+        alert("Name must be filled out");
+        return false;
+      }
+      if (sales == "") {
+        alert("Name must be filled out");
+        return false;
+      }
+      while (min1>max1){
+          alert("the min is bigger than max please fix it")
+          return false;
+      }
+
+ var name = new Salmon(name,min1,max1,sales);
+name.getRandomCustomNum();
+name.printSales();
+
+name.reset;
+})
+
 // header//...................................................................
-// 
-// 
 var table = document.getElementById('container');
 var tablEl = document.createElement('table');
 table.appendChild(tablEl);
