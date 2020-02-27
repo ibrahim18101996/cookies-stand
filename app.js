@@ -64,7 +64,7 @@ myForm.addEventListener('submit',function(event){
 name.getRandomCustomNum();
 name.printSales();
 
-name.reset;
+event.target.myForm.reset;
 })
 
 // header//...................................................................
