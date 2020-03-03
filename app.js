@@ -64,7 +64,8 @@ myForm.addEventListener('submit',function(event){
 name.getRandomCustomNum();
 name.printSales();
 
-name.reset;
+// name.reset;
+form1.reset();//conflict
 })
 
 // header//...................................................................
@@ -113,7 +114,8 @@ th1.textContent = " Total ";
 for(var i = 0; i < name.length ;i ++){
     var th1 = document.createElement('th');
     tableFooter.appendChild(th1);
-    th1.textContent = sum;
+    // th1.textContent = sum;
+    th1.textContent = sum[i];//conflict
 }
 
     var seattle = new Salmon('Seatle',23,65,6.3);
